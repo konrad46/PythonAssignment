@@ -94,7 +94,18 @@ public class NewCustomerServlet extends HttpServlet {
             String zipCode = request.getParameter("zipCode");
             String email = request.getParameter("email");
         
-            request.setAttribute("firstName", firstName);
+            
+            
+            if (firstName == null ||lastName == null || phone == null || address == null||
+                    city == null || state == null || zipCode == null || email == null ||
+                    firstName.isEmpty() || lastName.isEmpty() || phone.isEmpty() ||
+                    address.isEmpty() || city.isEmpty() || state.isEmpty() ||
+                    zipCode.isEmpty()|| email.isEmpty()){
+                request.setAttribute("msg", "All Fields Are Mandatory");
+                getServletContext().getRequestDispatcher("/New_Customer.html").forward(request, response);
+            }
+            else {
+                request.setAttribute("firstName", firstName);
             request.setAttribute("lastName", lastName);
             request.setAttribute("phone", phone);
             request.setAttribute("address", address);
@@ -105,25 +116,14 @@ public class NewCustomerServlet extends HttpServlet {
             
             User user = new User(firstName,lastName, phone, address, city, state, zipCode, email );
         
-            String message;
-            if (firstName == null ||lastName == null || phone == null || address == null||
-                    city == null || state == null || zipCode == null || email == null ||
-                    firstName.isEmpty() || lastName.isEmpty() || phone.isEmpty() ||
-                    address.isEmpty() || city.isEmpty() || state.isEmpty() ||
-                    zipCode.isEmpty()|| email.isEmpty()){
-                message = "Please fill out all the form fields.";
-                url = "New_Customer.html";
                 
-            }
-            else {
-                message = "";
                 url = "Success.html";
                
                 
             }
            
             
-            request.setAttribute("message", message);
+            
             
         }
         getServletContext()
