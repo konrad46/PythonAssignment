@@ -5,13 +5,11 @@
  */
 package CL;
 
+import java.beans.*;
 import java.io.Serializable;
 
-/**
- *
- * @author paul
- */
-public class User implements Serializable{
+
+ public class User implements Serializable{
     private String firstName;
     private String lastName;
      private String phone;
@@ -21,7 +19,8 @@ public class User implements Serializable{
          private String zipCode;
           private String email;
           private String message = "Please fill out the form";
-          
+          private String userName;
+          private String password;
           public String getMessage(){
               return message;
               
@@ -36,6 +35,9 @@ public class User implements Serializable{
              state = "";
              zipCode = "";
              email = "";
+             userName = "";
+             password = "";
+             
              
               
           }
@@ -50,17 +52,31 @@ public class User implements Serializable{
           this.zipCode = zipCode;
           this.email = email;
           }
+          public String getPassword(){
+              password = "welcome1";
+              return password;
+          }
+          public void setPassword(String password){
+              this.password = password;
+          }
+          public String getUserName(){
+              userName = firstName+zipCode;
+              return userName;
+          }
+          public void setUserName(String userName){
+              this.userName = userName;
+          }
           public String getFirstName(){
               return firstName;
           }
-          public void setFirstname(String firstname){
+          public void setFirstname(String firstName){
               this.firstName = firstName;
           }
           public String getLastName(){
-              return phone;
+              return lastName;
           }
-           public void setlastname(String phone){
-              this.phone = phone;
+           public void setlastname(String lastName){
+              this.lastName = lastName;
           }
           public String getPhone(){
               return phone;
@@ -101,5 +117,5 @@ public class User implements Serializable{
            public boolean validate(){
                return true;
            }
-          
-}
+
+ }

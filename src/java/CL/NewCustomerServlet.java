@@ -115,8 +115,8 @@ public class NewCustomerServlet extends HttpServlet {
             request.setAttribute("email", email);
             
             User user = new User(firstName,lastName, phone, address, city, state, zipCode, email );
-        
-                
+                request.setAttribute("username", lastName+zipCode);
+                request.setAttribute("password", "welcome1");
                 url = "Success.html";
                
                 

@@ -15,11 +15,14 @@ and open the template in the editor.
        
         <form method="post" action="LoginServlet" > 
             <br/>Username:<input type="text" name="username">
-            <br/>Password:<input type="password" name="password">
+            <br/>Password:<input type="password" name="password" value="$(user.password)">
             <br/><input type="submit" value="Login"> </form>
 
         <form action="New_customer.html">
     <input type="submit" value="New Customer Sign Up">
+    </form>
+    <form action="password_reset.jsp">
+    <input type="submit" value="Reset Password">
 </form>
         
     </body>
