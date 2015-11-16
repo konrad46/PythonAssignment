@@ -13,10 +13,9 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     </head>
     <body>
-        <form method="post" action="LoginServlet" > 
-            <br/>Username:<input type="text" name="username">
+        <form method="post" action="PasswordResetServlet" > 
             <br/>New Password:<input type="password" name="password" value="$(user.password)">
-            <br/><input type="submit" value="Account_Activity"> 
+            <br/><input type="submit" value="Change Password"> 
         </form>
     </body>
 </html>

@@ -12,6 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 
 
@@ -102,23 +103,17 @@ public class NewCustomerServlet extends HttpServlet {
                     address.isEmpty() || city.isEmpty() || state.isEmpty() ||
                     zipCode.isEmpty()|| email.isEmpty()){
                 request.setAttribute("msg", "All Fields Are Mandatory");
-                getServletContext().getRequestDispatcher("/New_Customer.html").forward(request, response);
+                getServletContext().getRequestDispatcher("/New_Customer.jsp").forward(request, response);
             }
             else {
-                request.setAttribute("firstName", firstName);
-            request.setAttribute("lastName", lastName);
-            request.setAttribute("phone", phone);
-            request.setAttribute("address", address);
-            request.setAttribute("city", city);
-            request.setAttribute("state", state);
-            request.setAttribute("zipCode", zipCode);
-            request.setAttribute("email", email);
+                
             
-            User user = new User(firstName,lastName, phone, address, city, state, zipCode, email );
-                request.setAttribute("username", lastName+zipCode);
-                request.setAttribute("password", "welcome1");
-                url = "Success.html";
-               
+                User user = new User(firstName,lastName, phone, address, city, state, zipCode, email );
+                
+                url = "success.jsp";
+                HttpSession session = request.getSession();
+                session.setAttribute("user",user);
+                //add user oto the session in videos
                 
             }
            

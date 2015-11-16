@@ -4,6 +4,9 @@ To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<c:import url="/includes/header/html" /><!DOCTYPE html>
 <html>
     <head>
         <title>New customer</title>
@@ -13,7 +16,7 @@ and open the template in the editor.
     </head>
     <body>
         <div>Enter your information</div>
-        <form action="Success.html" method="post">
+        <form action="success.jsp" method="post">
             <label>First name:</label>
             <input type="text" name="firstName" ><br>
             <label>Last name:</label>
@@ -38,3 +41,4 @@ and open the template in the editor.
         
     </body>
 </html>
+<c:import url="/includes/footer.jsp" />
