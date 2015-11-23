@@ -43,8 +43,10 @@ public class PasswordResetServlet extends HttpServlet {
         }else{
              
              response.sendRedirect("Login_failure.jsp");
+             UserDB.update(user);
+
         }
-           
+             request.setAttribute("user", user);
     }
     
     

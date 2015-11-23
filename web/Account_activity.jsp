@@ -22,6 +22,7 @@
          <c:if test='${user.userName == null}'>
              Not Logged in
          </c:if>
+             
     </body>
 </html>
 <c:import url="/includes/footer.jsp" />

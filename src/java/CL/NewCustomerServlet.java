@@ -15,7 +15,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 
-
 /**
  *
  * @author paul
@@ -94,7 +93,9 @@ public class NewCustomerServlet extends HttpServlet {
             String state = request.getParameter("state");
             String zipCode = request.getParameter("zipCode");
             String email = request.getParameter("email");
-        
+            Double balance = 0.00;
+            Double checking = 0.00;
+            Double savings = 25.00;
             
             
             if (firstName == null ||lastName == null || phone == null || address == null||
@@ -109,10 +110,12 @@ public class NewCustomerServlet extends HttpServlet {
                 
             
                 User user = new User(firstName,lastName, phone, address, city, state, zipCode, email );
-                
+                Account account = new Account (user, balance, checking, savings);
                 url = "success.jsp";
+                
                 HttpSession session = request.getSession();
                 session.setAttribute("user",user);
+                session.setAttribute("account", account);
                 //add user oto the session in videos
                 
             }
