@@ -11,7 +11,7 @@ package CL;
  */
 public class Account {
     
- private User user;
+    private User user;
     private AccountType accountType;
     private double balance;
     

@@ -17,7 +17,9 @@
         <h1>User Account info</h1>
         
         <c:if test='${user.userName != null}'>
-            ${user.firstName}+${user.lastName}
+            <p>${user.firstName}+${user.lastName}<p>
+            <p>Savings: ${savingsAccount.balance}</p>
+            <p>Checking: ${checkingAccount.balance}</p>
         </c:if>
          <c:if test='${user.userName == null}'>
              Not Logged in

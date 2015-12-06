@@ -5,12 +5,15 @@
  */
 package CL;
 
+import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.date;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import javax.transaction.Transaction;
 
 /**
  *
@@ -83,20 +86,14 @@ public class TransactionServlet extends HttpServlet {
         } else if (action.equals("transferFunds")) {
             // get properties
             
-            
-            
-            // store data in object
-            Account account = new Account (user, balance, checking, savings);
            
-                       
-            // validate
-            String message = "";
-          
             
             HttpSession session = request.getSession();
+            User user = (User) session.getAttribute("user");
+            Account account = (Account) session.getAttribute("account");
+            
             session.setAttribute("user", user);
             session.setAttribute("account", account);
-            request.setAttribute("message", message);
         }
         getServletContext()
                         .getRequestDispatcher(url)
