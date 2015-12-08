@@ -7,6 +7,7 @@ package CL;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.security.NoSuchAlgorithmException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -93,9 +94,12 @@ public class NewCustomerServlet extends HttpServlet {
             String state = request.getParameter("state");
             String zipCode = request.getParameter("zipCode");
             String email = request.getParameter("email");
+            
             Double balance = 0.00;
             Double checking = 0.00;
             Double savings = 25.00;
+            
+            
             
             
             if (firstName == null ||lastName == null || phone == null || address == null||
@@ -112,6 +116,27 @@ public class NewCustomerServlet extends HttpServlet {
                 User user = new User(firstName,lastName, phone, address, city, state, zipCode, email );
                 Account account = new Account (user, balance, checking, savings);
                 url = "success.jsp";
+                
+               String username = request.getParameter("username");
+               String password = request.getParameter("password");
+               
+               String message;
+               String hashedPassword;
+               String salt = "";
+               String saltedAndHashedPassword;
+                       
+               try {
+                   hashedPassword = PasswordUtil.hashPassword(password);
+                   salt = PasswordUtil.getSalt();
+                   saltedAndHashedPassword = PasswordUtil.hashAndSaltPassword(password);
+               } catch (NoSuchAlgorithmException ex){
+                   hashedPassword = ex.getMessage();
+                   saltedAndHashedPassword = ex.getMessage();
+               }
+               request.setAttribute("hashedPassword", hashedPassword);
+               request.setAttribute("salt", salt);
+               request.setAttribute("saltedAndHashedPassword", saltedAndHashedPassword);
+               
                 
                 HttpSession session = request.getSession();
                 session.setAttribute("user",user);

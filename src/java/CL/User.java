@@ -6,6 +6,8 @@
 package CL;
 
 import java.io.Serializable;
+import java.security.NoSuchAlgorithmException;
+
 
 
  public class User implements Serializable{
@@ -19,6 +21,8 @@ import java.io.Serializable;
     private String email;
     private String userName;
     private String password;
+    private String saltedAndHashedPassword;
+    private String salt;
    
           
     public User() {
@@ -32,6 +36,8 @@ import java.io.Serializable;
         email = "";
         userName = lastName + zipCode;
         password = "welcome1";
+        saltedAndHashedPassword = "";
+        salt = "";
              
              
               
@@ -48,6 +54,12 @@ import java.io.Serializable;
           this.email = email;
           this.userName = lastName + zipCode;
           this.password = "welcome1";
+          this.salt = PasswordUtil.getSalt();
+        try {
+            this.saltedAndHashedPassword = PasswordUtil.hashPassword(this.password + this.salt);                   
+        } catch (NoSuchAlgorithmException ex) {
+            System.out.println(ex);
+        } 
           }
     public String getPassword(){
               return password;
@@ -109,6 +121,12 @@ import java.io.Serializable;
     public void setEmail(String email){
         this.email = email;
     }
-           
+    public String getSaltedAndHashedPassword () {
+        return saltedAndHashedPassword;
+    }
+    
+    public String getSalt () {
+        return salt;
+    }
 
  }

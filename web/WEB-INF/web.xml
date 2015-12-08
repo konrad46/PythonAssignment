@@ -1,5 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+    <security-role>
+        <description>admin</description>
+        <role-name>admin</role-name>
+    </security-role>
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>Protected Area</web-resource-name>
+            <url-pattern>/admin/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>admin</role-name>
+        </auth-constraint>
+        <user-data-constraint>
+        <transport-guarantee>CONFIDENTIAL</transport-guarantee>
+        </user-data-constraint>
+    </security-constraint>
     <servlet>
         <servlet-name>LoginServlet</servlet-name>
         <servlet-class>CL.LoginServlet</servlet-class>
@@ -19,6 +35,22 @@
     <servlet>
         <servlet-name>PasswordResetServlet</servlet-name>
         <servlet-class>CL.PasswordResetServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ReportsServlet</servlet-name>
+        <servlet-class>CL.ReportsServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ConnectionPool</servlet-name>
+        <servlet-class>CL.ConnectionPool</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>FilterRequest</servlet-name>
+        <servlet-class>CL.FilterRequest</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CookieUtil</servlet-name>
+        <servlet-class>CL.CookieUtil</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
@@ -47,6 +79,22 @@
     <servlet-mapping>
         <servlet-name>PasswordResetServlet</servlet-name>
         <url-pattern>/PasswordResetServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ReportsServlet</servlet-name>
+        <url-pattern>/ReportsServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ConnectionPool</servlet-name>
+        <url-pattern>/ConnectionPool</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FilterRequest</servlet-name>
+        <url-pattern>/FilterRequest</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CookieUtil</servlet-name>
+        <url-pattern>/CookieUtil</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
