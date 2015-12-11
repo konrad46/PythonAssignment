@@ -15,6 +15,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import java.math.BigDecimal;
+import CL.User;
+import CL.AccountType;
+import CL.Account;
+        
 
 /**
  *
@@ -95,11 +100,10 @@ public class NewCustomerServlet extends HttpServlet {
             String zipCode = request.getParameter("zipCode");
             String email = request.getParameter("email");
             
-            Double balance = 0.00;
-            Double checking = 0.00;
-            Double savings = 25.00;
             
             
+            String message;
+            User user = new User(firstName, lastName, phone, address, city, state, zipCode, email);
             
             
             if (firstName == null ||lastName == null || phone == null || address == null||
@@ -113,14 +117,21 @@ public class NewCustomerServlet extends HttpServlet {
             else {
                 
             
-                User user = new User(firstName,lastName, phone, address, city, state, zipCode, email );
-                Account account = new Account (user, balance, checking, savings);
-                url = "success.jsp";
+                message = "";
+                url = "/success.jsp";
+                UserDB.insert(user); 
+                
+                //Create New Accounts
+                Account savings = new Account( user, new BigDecimal(25.00), AccountType.SAVING);
+                Account checking = new Account( user, new BigDecimal(0.00), AccountType.CHECKING);
+                
+                 
+                AccountDB.insert( savings); 
+                AccountDB.insert( checking);
                 
                String username = request.getParameter("username");
                String password = request.getParameter("password");
                
-               String message;
                String hashedPassword;
                String salt = "";
                String saltedAndHashedPassword;
@@ -140,7 +151,6 @@ public class NewCustomerServlet extends HttpServlet {
                 
                 HttpSession session = request.getSession();
                 session.setAttribute("user",user);
-                session.setAttribute("account", account);
                 //add user oto the session in videos
                 
             }

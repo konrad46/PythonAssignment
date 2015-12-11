@@ -9,42 +9,70 @@ package CL;
  *
  * @author paul
  */
+import java.math.BigDecimal;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+import CL.AccountType;
+
+@Entity
 public class Account {
     
-    private User user;
-    private AccountType accountType;
-    private double balance;
-    
-    public Account(User user, AccountType accountType, double balance) {
+        @Id
+        @GeneratedValue(strategy = GenerationType.AUTO)
+        Long id;
+	public AccountType acctType = AccountType.SAVING;
+	public BigDecimal balance = new BigDecimal(0);
         
-        this.user = user;
-        this.accountType = accountType;
-        this.balance = balance;
-    }
-
-  
-
-    Account(User user, Double balance, Double checking, Double savings) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-    public void credit(double deposit) {
+        //@ManyToOne
+	public User usr;
         
-        this.balance = this.balance + deposit; 
-    }
-    
-    public void debit(double withdrawal) {
+        User user = null;
         
-        this.balance = this.balance - withdrawal;
-    }
-    
-    public double getBalance() {
         
-        return this.balance;
-    }
-    
-    public String getAccountType() {
+       // @OneToMany(fetch=EAGER, cascade=CascadeType.PERSIST)
+       // private List<LineItem> lineItems;
         
-        return this.accountType.toString();
-    }
+	public Account() {
+	}
+	
+	public Account(User usr, BigDecimal balance, AccountType acctType) {
+		this.usr = usr;
+		this.balance = balance;
+		this.acctType = acctType;
+	}
+        
+	public void credit( BigDecimal creditAmount) {
+            
+            this.balance = this.balance.add( creditAmount);
+            
+	}
+	public void debit( BigDecimal debitAmount) {
+            	
+            this.balance = this.balance.subtract( debitAmount);
+            
+	}
+	
+	public AccountType getAccountType() {
+		return acctType;
+	}
+	public void setAccountType( AccountType acctType) {
+		this.acctType = acctType;
+	}
+	
+	public BigDecimal getBalance() {
+		return this.balance;
+	}
+	public void setBalance( BigDecimal balance) {
+		this.balance = balance;
+	}
+	
+	public User getUser() {
+		return this.usr;
+	}
+	public void setUser( User usr) {
+		this.usr = usr;
+	}
 }

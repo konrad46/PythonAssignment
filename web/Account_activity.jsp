@@ -5,26 +5,47 @@
 --%>
 
 
+<%@page import="javax.transaction.Transaction"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:import url="/includes/header/html" />
+<%@page import="java.lang.Object"%>
+<%@page import="java.util.List"%>
+<%@page import="CL.Account"%>
+<%@page import="CL.TransactionServlet"%>
 
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    </head>
-    <body>
-        <h1>User Account info</h1>
-        
-        <c:if test='${user.userName != null}'>
-            <p>${user.firstName}+${user.lastName}<p>
-            <p>Savings: ${savingsAccount.balance}</p>
-            <p>Checking: ${checkingAccount.balance}</p>
+<div class="jumbotron">
+    <div class="container">
+        <h1>Account Activity</h1>
+        <c:if test = "${user == null}">
+            <p>Hey There! You're not logged in.</p>
+            <p><a class="btn btn-primary btn-lg" href="login.html" role="button">Login &raquo;</a></p>
         </c:if>
-         <c:if test='${user.userName == null}'>
-             Not Logged in
-         </c:if>
-             
-    </body>
-</html>
+        <c:if test = "${user != null}">
+            <p>Howdy ${sessionScope.user.firstName} ${sessionScope.user.lastName}, you are logged in!</p>
+        </c:if>
+    </div>
+</div>
+
+<div class="container">
+
+    <h1>Your Recent Activity</h1>
+
+    <table class="table">
+        <tr>
+            <th>Date</th>
+            <th>Transaction Type</th>
+            <th>Amount</th>
+        </tr>
+
+        <c:forEach var="item" items="${user.transactionHistory}">
+            <tr>
+                <td>${item.date}</td>
+                <td>${item.type}</td>
+                <td>${item.transAmtCurrencyFormat}</td>
+            </tr>
+        </c:forEach>
+    </table>
+
+</div> <!--end of container-->
+
 <c:import url="/includes/footer.jsp" />

@@ -8,4 +8,5 @@
             url="jdbc:mysql://localhost:3306/toba?autoReconnect=true" 
             username="toba_user" roleNameCol="Rolename" userCredCol="Password"
             userNameCol="Username" userRoleTable="UserRole" userTable="UserPass"/>
+
 </Context>

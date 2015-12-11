@@ -60,4 +60,18 @@ public class AccountDB {
             em.close();
         }
     }
+    public static void delete( Account account) {
+        EntityManager em = DBUtil.getEmFactory().createEntityManager();
+        EntityTransaction trans = em.getTransaction();
+        trans.begin();        
+        try {
+            em.remove(em.merge( account));
+            trans.commit();
+        } catch (Exception e) {
+            System.out.println(e);
+            trans.rollback();
+        } finally {
+            em.close();
+        }       
+    }
 }

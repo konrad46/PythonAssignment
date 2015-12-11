@@ -37,8 +37,9 @@ public class PasswordResetServlet extends HttpServlet {
         User user = (User)session.getAttribute("user");
         String url = "";
         if(user != null){   
-            user.setPassword(password);
+            
             session.setAttribute("user", user);
+            user.setPassword(password);
             url = "/account_activity.jsp";
         }else{
              
